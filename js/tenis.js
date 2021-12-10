@@ -18,7 +18,7 @@ class Tenis {
     //Constantes
 		this.HUMANO = 0
 		this.IA = 1
-    this.ARRIBA = Symbol()
+    this.ARRIBA = Symbol()  //Symbol crea un símbolo único en el sistema
     this.ABAJO = Symbol()
 
     //Inicialización de atributos
@@ -267,8 +267,18 @@ class Vista {
     //Línea de red
     this.canvas.ctx.strokeStyle = 'white'
     this.canvas.ctx.lineWidth = 6
-    this.canvas.ctx.moveTo(campo.anchura / 2 - 5, 0)
-    this.canvas.ctx.lineTo(campo.anchura / 2 - 5, campo.altura)
+    this.canvas.ctx.moveTo(campo.anchura / 2, 0)
+    this.canvas.ctx.lineTo(campo.anchura / 2, campo.altura)
+    this.canvas.ctx.stroke()
+
+    
+
+    //Línea central
+    this.canvas.ctx.beginPath()
+    this.canvas.ctx.strokeStyle = 'red'
+    this.canvas.ctx.lineWidth = 3
+    this.canvas.ctx.moveTo(0 , campo.altura / 2)
+    this.canvas.ctx.lineTo(campo.anchura, campo.altura / 2)
     this.canvas.ctx.stroke()
 
     /*
@@ -300,7 +310,7 @@ class Vista {
     this.canvas.ctx.beginPath()
     this.canvas.ctx.arc( //cx, cy, radio, start_angle, end_angle
       pelota.posicion[0] - this.pelota.radio,
-      pelota.posicion[1], this.pelota.radio, 0, 2 * Math.PI)
+      pelota.posicion[1], this.pelota.radio, Math.PI, 2 * Math.PI)
     this.canvas.ctx.fill()
   }
   /**
@@ -310,7 +320,7 @@ class Vista {
     for (let i = 0; i < 2; i++) {
       this.canvas.ctx.fillStyle = this.jugadores[i].color
       this.canvas.ctx.fillRect(
-        jugadores[i].posicion[0],
+        jugadores[i].posicion[0] - this.jugadores[i].anchura / 2,
         jugadores[i].posicion[1] - this.jugadores[i].altura / 2,
         this.jugadores[i].anchura,
         this.jugadores[i].altura)
